@@ -1,81 +1,63 @@
-# JSON to Excel Converter
+# Tawk.to Dashboard Automation Bot
 
-This application converts Tawk.to JSON chat files to Excel format.
+This bot automates the process of exporting conversations from the Tawk.to dashboard.
 
 ## Features
 
-- Simple GUI interface
-- Batch conversion of all JSON files in a directory
-- Progress tracking
-- Extracts key information from chat files:
-  - Chat ID, type, page ID
-  - Visitor information (name, email)
-  - Location information (country, city)
-  - Message count, chat duration (in minutes), rating
-  - Timestamps
-  - Full conversation text
-  - Separated visitor and agent messages
-  - Individual messages with sender and timestamp
-  - Agent names
-  - First/last messages
+- Automatically logs into the Tawk.to dashboard
+- Navigates to the inbox
+- Selects all conversations 
+- Exports conversations to a specified email
+- Handles pagination (processes 100 conversations per page)
+
+## Prerequisites
+
+- Node.js (v14 or later recommended)
+- npm (comes with Node.js)
 
 ## Installation
 
-1. Make sure you have Python 3.7+ installed
-2. Install the required dependencies:
+1. Clone this repository or download the files
+2. Open a terminal/command prompt in the project directory
+3. Install dependencies:
 
-```
-pip install -r requirements.txt
-```
-
-## Usage
-
-1. Run the application:
-
-```
-python json_to_excel.py
+```bash
+npm install
 ```
 
-2. Select the input directory containing your JSON files
-3. Select the output directory where the Excel file will be saved
-4. Optionally, change the output Excel file name
-5. Click "Convert" to start the conversion process
-6. Wait for the conversion to complete
-7. Open the generated Excel file
+## Configuration
 
-## Excel Output Format
+You can modify the configuration in the `tawkbot.js` file:
 
-The Excel file will contain one row per chat, with the following columns:
+- `loginUrl`: The URL of the Tawk.to login page
+- `email`: Your Tawk.to account email
+- `password`: Your Tawk.to account password
+- `exportEmail`: The email where you want to receive exports
+- `waitTime`: The time to wait for page loads (in milliseconds)
 
-- Chat ID
-- Type
-- Page ID
-- Domain
-- Visitor Name
-- Visitor ID
-- Visitor Email
-- Country
-- City
-- Message Count
-- Chat Duration (minutes)
-- Rating
-- Created On
-- First Message
-- First Visitor Message
-- Last Message
-- Agent Names
-- All Visitor Messages (combined in one cell)
-- All Agent Messages (combined in one cell)
-- All System Messages (combined in one cell)
-- Message 1 Time, Message 1 Sender, Message 1 Text
-- Message 2 Time, Message 2 Sender, Message 2 Text
-- ... (up to 100 individual messages)
-- Conversation (all messages combined)
+## Running the Bot
+
+To run the bot, use the following command in the project directory:
+
+```bash
+node tawkbot.js
+```
+
+The bot will:
+1. Open a browser window (visible by default)
+2. Log into the Tawk.to dashboard
+3. Navigate to the inbox
+4. Select and export conversations page by page
+5. Send the exports to the specified email
 
 ## Troubleshooting
 
-If you encounter any issues:
+If the bot encounters issues:
 
-1. Make sure the input directory contains valid JSON files
-2. Check that you have write permissions for the output directory
-3. Ensure all dependencies are installed 
+- Make sure your login credentials are correct
+- Increase the `waitTime` if the page is loading slowly
+- Check if the XPATHs have changed (website updates may require path updates)
+
+## Security Note
+
+This script contains sensitive information (login credentials). Never share your script with these details included. Consider using environment variables for sensitive information in a production environment. 
